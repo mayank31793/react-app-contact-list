@@ -18,10 +18,11 @@ export const deleteContactDetails = createAsyncThunk('data/deleteContact', async
     return response.data
 })
 
-export const editContactDetails = createAsyncThunk('data/editContact', async (data) => {
+export const updateContactDetails = createAsyncThunk('data/updateContact', async (data) => {
     console.log('aaya edit slice mai ?? ', data)
     let key = data.key
     delete data.key
+    console.log('data >>>>> ', data)
     const response = await api.put(`/contacts/${key}.json`, data);
     return response.data
 })
@@ -43,6 +44,7 @@ const contactSlice = createSlice({
                         fname: action.payload[key].firstName,
                         lname: action.payload[key].lastName,
                         contact: action.payload[key].contactNumber,
+                        isFavourite: action.payload[key].isFavourite
                     };
                     listOfContacts.push(data);
                 }
@@ -51,7 +53,7 @@ const contactSlice = createSlice({
             .addCase(deleteContactDetails.fulfilled, (state, action) => {
                 state.refresh = !state.refresh
             })
-            .addCase(editContactDetails.fulfilled, (state, action) => {
+            .addCase(updateContactDetails.fulfilled, (state, action) => {
                 state.refresh = !state.refresh
             })
     }

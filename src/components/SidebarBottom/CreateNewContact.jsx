@@ -33,6 +33,7 @@ function CreateNewContact() {
         firstName: firstNameRef.current.value,
         lastName: lastNameRef.current.value,
         contactNumber: contactNumberRef.current.value,
+        isFavourite: false,
       };
       dispatch(saveNewContact(data));
       e.target.reset();
