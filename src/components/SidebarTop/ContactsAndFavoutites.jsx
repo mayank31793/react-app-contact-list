@@ -3,6 +3,7 @@ import { Link, NavLink } from "react-router-dom";
 
 function ContactsAndFavoutites() {
   const selector = useSelector((state) => state.name.contact);
+  const favourites = selector.filter((res) => res.isFavourite);
   return (
     <>
       <div className="flex flex-col">
@@ -24,7 +25,7 @@ function ContactsAndFavoutites() {
               : "p-5 m-1"
           }
         >
-          Favourites
+          {favourites.length} Favourites
         </NavLink>
       </div>
     </>
