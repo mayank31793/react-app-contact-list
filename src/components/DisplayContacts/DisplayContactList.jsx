@@ -5,6 +5,7 @@ import {
   faHeart,
   faXmark,
   faCheck,
+  faFilePen,
 } from "@fortawesome/free-solid-svg-icons";
 import { useEffect, useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
@@ -86,7 +87,14 @@ function DisplayContactList() {
   return (
     <>
       <div className="border-2 border-amber-700 bg-gray-300 overflow-y-scroll relative">
-        {selector.length == 0 && <p>No Contacts Added</p>}
+        {selector.length == 0 && (
+          <div className="min-w-4xl h-full flex flex-col justify-center items-center">
+            <FontAwesomeIcon icon={faFilePen} className="text-7xl block" />
+            <p className="text-3xl block text-center mt-5">
+              No Contacts To Display, start adding Contacts
+            </p>
+          </div>
+        )}
         {selector.length != 0 && (
           <table className="max-w-7xl m-2 min-w-4xl text-center border border-2 overflow-y-scroll">
             <thead className="bg-gray-400 ">

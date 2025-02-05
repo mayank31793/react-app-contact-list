@@ -1,4 +1,6 @@
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useSelector } from "react-redux";
+import { faHeart } from "@fortawesome/free-solid-svg-icons";
 
 function DisplatFavContacts() {
   const selector = useSelector((state) => state.name.contact);
@@ -7,7 +9,17 @@ function DisplatFavContacts() {
   return (
     <>
       <div className="min-w-4xl bg-gray-300">
-        {filterFav.length == 0 && <p>No Contacts Added</p>}
+        {filterFav.length == 0 && (
+          <div className="min-w-4xl h-full flex flex-col justify-center items-center">
+            <FontAwesomeIcon
+              icon={faHeart}
+              className="text-7xl block text-red-600"
+            />
+            <p className="text-3xl block text-center mt-5">
+              No Favourites To Display, start adding Favourites
+            </p>
+          </div>
+        )}
         {filterFav.length != 0 && (
           <table className="max-w-7xl m-2 min-w-4xl text-center border border-2 overflow-y-scroll">
             <thead className="bg-gray-400 ">
