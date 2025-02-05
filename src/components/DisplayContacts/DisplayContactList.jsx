@@ -48,12 +48,12 @@ function DisplayContactList() {
   }
   return (
     <>
-      <div className="border-2 border-amber-700">
+      <div className="border-2 border-amber-700 bg-gray-300 overflow-y-scroll ">
         {selector.length == 0 && <p>No Contacts Added</p>}
         {selector.length != 0 && (
-          <table className="max-w-7xl min-w-4xl text-center border border-2">
-            <thead className="bg-gray-300 ">
-              <tr className="border-2 border-solid border-gray-300">
+          <table className="max-w-7xl m-2 min-w-4xl text-center border border-2 overflow-y-scroll">
+            <thead className="bg-gray-400 ">
+              <tr className="border-2 border-solid border-black">
                 <th className="p-3">First Name</th>
                 <th className="p-3">Last Name</th>
                 <th className="p-3">Contact</th>
@@ -65,7 +65,7 @@ function DisplayContactList() {
                 return (
                   <tr
                     key={res.key}
-                    className="border-2 border-solid border-gray-300"
+                    className="border-2 border-solid border-black"
                   >
                     <td className="p-3 ">{res.fname}</td>
                     <td className="p-3">{res.lname}</td>

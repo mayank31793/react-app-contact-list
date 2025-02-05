@@ -1,7 +1,5 @@
-import React from "react";
-
 function DisplatFavContacts() {
-  return <div>DisplatFavContacts</div>;
+  return <div className="min-w-4xl bg-gray-300">DisplatFavContacts</div>;
 }
 
 export default DisplatFavContacts;

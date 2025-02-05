@@ -1,4 +1,3 @@
-import { isAction } from "@reduxjs/toolkit";
 import { useSelector } from "react-redux";
 import { Link, NavLink } from "react-router-dom";
 
@@ -10,7 +9,9 @@ function ContactsAndFavoutites() {
         <NavLink
           to="/"
           className={({ isActive }) =>
-            isActive ? "border-l-2 border-solid border-l-amber-300" : null
+            isActive
+              ? "p-5 m-1 border-l-2 border-solid border-l-amber-300 bg-blue-950"
+              : "p-5 m-1"
           }
         >
           {selector.length} Contacts
@@ -18,7 +19,9 @@ function ContactsAndFavoutites() {
         <NavLink
           to="/favourites"
           className={({ isActive }) =>
-            isActive ? "border-l-2 border-solid border-l-amber-300" : null
+            isActive
+              ? "p-5 m-1 border-l-2 border-solid border-l-amber-300 bg-blue-950"
+              : "p-5 m-1"
           }
         >
           Favourites

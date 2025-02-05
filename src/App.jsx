@@ -10,7 +10,7 @@ export default function App() {
     <>
       <div className="w-full bg-[#6c6ea0] h-dvh">
         <Header />
-        <div className="flex justify-center w-full pt-10">
+        <div className="flex justify-center w-full pt-10 h-130">
           <div className="bg-[#324376] text-white">
             <ContactsAndFavoutites />
             <CreateNewContact />
