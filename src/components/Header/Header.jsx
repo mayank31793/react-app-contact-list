@@ -1,7 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import axios from "axios";
 
 function Header() {
+  function searchQuery() {
+    let name = "mayank";
+    axios
+      .get(
+        `https://spotify-clone-de175.firebaseio.com/contacts.json?orderBy="firstName"&equalTo="${name}"`
+      )
+      .then((res) => console.log(res));
+  }
+  function limitQuery() {
+    let count = 5;
+    axios
+      .get(
+        `https://spotify-clone-de175.firebaseio.com/contacts.json?orderBy="$key"&limitToFirst=${count}`
+      )
+      .then((res) => console.log(res));
+  }
   return (
     <>
       <div className="flex justify-between bg-[#c1cad6] p-4 text-amber-950">
@@ -20,6 +37,8 @@ function Header() {
             className="w-full h-full text-center outline-0"
             placeholder="Search"
           />
+          <button onClick={searchQuery}>search name</button>
+          <button onClick={limitQuery}>limit index</button>
         </div>
         <div className="login">
           <p>Login</p>
