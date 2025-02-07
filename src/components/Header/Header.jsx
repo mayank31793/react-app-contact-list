@@ -1,15 +1,21 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
+import { querySearchDetails, getContactDetails } from "../../contactSlice";
+import { useDispatch } from "react-redux";
+import { useState, useRef } from "react";
 
 function Header() {
-  function searchQuery() {
-    let name = "mayank";
-    axios
-      .get(
-        `https://spotify-clone-de175.firebaseio.com/contacts.json?orderBy="firstName"&equalTo="${name}"`
-      )
-      .then((res) => console.log(res));
+  const [searchText, setSearchText] = useState("");
+  const searchString = useRef();
+  const dispatch = useDispatch();
+
+  function searchQuery(event) {
+    if (event.key == "Enter") {
+      searchString.current.value.length != 0
+        ? dispatch(querySearchDetails(searchString.current.value))
+        : dispatch(getContactDetails());
+    }
   }
   function limitQuery() {
     let count = 5;
@@ -36,8 +42,9 @@ function Header() {
             type="text"
             className="w-full h-full text-center outline-0"
             placeholder="Search"
+            ref={searchString}
+            onKeyUp={searchQuery}
           />
-          <button onClick={searchQuery}>search name</button>
           <button onClick={limitQuery}>limit index</button>
         </div>
         <div className="login">
