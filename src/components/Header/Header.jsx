@@ -1,5 +1,5 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faAddressCard } from "@fortawesome/free-solid-svg-icons";
+import { faAddressCard, faCode } from "@fortawesome/free-solid-svg-icons";
 import axios from "axios";
 import { querySearchDetails, getContactDetails } from "../../contactSlice";
 import { useDispatch } from "react-redux";
@@ -70,7 +70,14 @@ function Header() {
           <button onClick={limitQueryNext}>Next Call</button> */}
         </div>
         <div className="login">
-          <p>Login</p>
+          <a
+            href="https://github.com/mayank31793/react-app-contact-list"
+            target="_blank"
+            className="text-[#324376] text-xl pt-3 items-center"
+          >
+            Gihub&nbsp;Link&nbsp;
+            <FontAwesomeIcon icon={faCode} />
+          </a>
         </div>
       </div>
     </>

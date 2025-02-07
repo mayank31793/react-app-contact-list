@@ -4,8 +4,16 @@ import Header from "./components/Header/Header";
 import CreateNewContact from "./components/SidebarBottom/CreateNewContact";
 import ContactsAndFavoutites from "./components/SidebarTop/ContactsAndFavoutites";
 import DisplatFavContacts from "./components/DisplayContacts/DisplayFavContacts";
+import { useEffect } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { getContactDetails } from "./contactSlice";
 
 export default function App() {
+  const dispatch = useDispatch();
+  const selectorRefresh = useSelector((state) => state.name.refresh);
+  useEffect(() => {
+    dispatch(getContactDetails());
+  }, [dispatch, selectorRefresh]);
   return (
     <>
       <div className="w-full bg-[#6c6ea0] h-dvh">

@@ -7,30 +7,26 @@ import {
   faCheck,
   faFilePen,
 } from "@fortawesome/free-solid-svg-icons";
-import { useEffect, useRef, useState } from "react";
+import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  getContactDetails,
-  deleteContactDetails,
-  updateContactDetails,
-} from "../../contactSlice";
+import { deleteContactDetails, updateContactDetails } from "../../contactSlice";
 
 function DisplayContactList() {
   const [coordinates, setCoordinates] = useState({ left: 0, right: 0 });
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.name.contact);
-  const selectorRefresh = useSelector((state) => state.name.refresh);
 
   const editFirstName = useRef();
   const editLastName = useRef();
   const editContactNumber = useRef();
   const editContactKey = useRef();
+  const editFavourite = useRef();
 
   const [showEditableFields, setshowEditableFields] = useState(false);
 
-  useEffect(() => {
-    dispatch(getContactDetails());
-  }, [dispatch, selectorRefresh]);
+  // useEffect(() => {
+  //   dispatch(getContactDetails());
+  // }, [dispatch, selectorRefresh]);
 
   function deleteContact(id) {
     dispatch(deleteContactDetails(id));
@@ -58,6 +54,7 @@ function DisplayContactList() {
     editLastName.current.value = data.lname;
     editContactNumber.current.value = data.contact;
     editContactKey.current.value = data.key;
+    editFavourite.current.value = data.isFavourite;
     setshowEditableFields(true);
   }
   function closeEditInfo() {
@@ -80,6 +77,7 @@ function DisplayContactList() {
       firstName: editFirstName.current.value,
       lastName: editLastName.current.value,
       contactNumber: editContactNumber.current.value,
+      isFavourite: editFavourite.current.value,
     };
     dispatch(updateContactDetails(data));
     setshowEditableFields(false);
@@ -132,6 +130,7 @@ function DisplayContactList() {
                         className={`ml-2 mr-2 hover:text-rose-700 cursor-pointer ${
                           res.isFavourite ? " text-red-600" : "text-black"
                         }`}
+                        ref={editFavourite}
                       />
                     </td>
                   </tr>
