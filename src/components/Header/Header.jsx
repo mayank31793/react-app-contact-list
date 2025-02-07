@@ -9,6 +9,7 @@ function Header() {
   const [searchText, setSearchText] = useState("");
   const searchString = useRef();
   const dispatch = useDispatch();
+  // let lastKey = null;
 
   function searchQuery(event) {
     if (event.key == "Enter") {
@@ -17,14 +18,34 @@ function Header() {
         : dispatch(getContactDetails());
     }
   }
-  function limitQuery() {
-    let count = 5;
-    axios
-      .get(
-        `https://spotify-clone-de175.firebaseio.com/contacts.json?orderBy="$key"&limitToFirst=${count}`
-      )
-      .then((res) => console.log(res));
-  }
+  // function limitQuery() {
+  //   let count = 5;
+  //   axios
+  //     .get(
+  //       `https://spotify-clone-de175.firebaseio.com/contacts.json?orderBy="$key"&limitToFirst=${count}`
+  //     )
+  //     .then((res) => {
+  //       console.log(Object.keys(res.data)[Object.keys(res.data).length - 1]);
+  //       lastKey = Object.keys(res.data)[Object.keys(res.data).length - 1];
+  //     });
+  //   console.log(lastKey);
+  // }
+  // function limitQueryNext() {
+  //   // let count = 5;
+  //   console.log("last key", lastKey);
+  //   let url =
+  //     'https://spotify-clone-de175.firebaseio.com/contacts.json?orderBy="$key"&limitToFirst=5';
+  //   axios.get(url);
+  //   //   .then((res) => console.log(res));
+
+  //   axios
+  //     .get(
+  //       `https://spotify-clone-de175.firebaseio.com/contacts.json?orderBy="$key"&limitToFirst=5&startAt="${lastKey}"`
+  //     )
+  //     .then((res) => console.log("Next batch:", res));
+
+  //   // Update lastKey with the last item in the batch
+  // }
   return (
     <>
       <div className="flex justify-between bg-[#c1cad6] p-4 text-amber-950">
@@ -45,7 +66,8 @@ function Header() {
             ref={searchString}
             onKeyUp={searchQuery}
           />
-          <button onClick={limitQuery}>limit index</button>
+          {/* <button onClick={limitQuery}>First Call</button>
+          <button onClick={limitQueryNext}>Next Call</button> */}
         </div>
         <div className="login">
           <p>Login</p>

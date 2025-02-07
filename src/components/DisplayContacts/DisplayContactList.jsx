@@ -154,29 +154,34 @@ function DisplayContactList() {
         >
           <input
             type="text"
-            className="h-7 border border-solid border-gray-400 rounded-2xl outline-0 text-center"
+            className="h-7 border border-solid border-gray-400 rounded-2xl outline-0 text-center focus:border-[#324376]"
             ref={editFirstName}
           />
           <input
             type="text"
-            className="h-7 border border-solid border-gray-400 rounded-2xl outline-0 text-center"
+            className="h-7 border border-solid border-gray-400 rounded-2xl outline-0 text-center focus:border-[#324376]"
             ref={editLastName}
           />
           <input
             type="number"
-            className="h-7 border border-solid border-gray-400 rounded-2xl outline-0 text-center focus: appearance-none"
+            className="h-7 border border-solid border-gray-400 rounded-2xl outline-0 text-center focus:border-[#324376] focus: appearance-none"
             ref={editContactNumber}
+            style={{
+              appearance: "none",
+              WebkitAppearance: "none",
+              MozAppearance: "textfield",
+            }}
           />
           <div className="flex justify-center items-center w-40">
             <FontAwesomeIcon
               icon={faCheck}
-              className="text-2xl text-green-400 mx-3"
+              className="text-2xl text-green-400 mx-3 hover:cursor-pointer hover:text-green-600"
               ref={editContactKey}
               onClick={updateContactInfo}
             />
             <FontAwesomeIcon
               icon={faXmark}
-              className="text-2xl text-red-400 mx-3"
+              className="text-2xl text-red-400 mx-3 hover:cursor-pointer hover:text-red-600"
               onClick={closeEditInfo}
             />
           </div>
