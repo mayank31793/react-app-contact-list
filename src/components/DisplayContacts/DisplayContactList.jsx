@@ -9,12 +9,20 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { useRef, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { deleteContactDetails, updateContactDetails } from "../../contactSlice";
+import {
+  deleteContactDetails,
+  updateContactDetails,
+  updateTotalRecordsCount,
+} from "../../contactSlice";
+import Loader from "../Loader/Loader";
 
 function DisplayContactList() {
   const [coordinates, setCoordinates] = useState({ left: 0, right: 0 });
   const dispatch = useDispatch();
   const selector = useSelector((state) => state.name.contact);
+  const totalRecordsCount = useSelector(
+    (state) => state.name.totalRecordsCount
+  );
 
   const editFirstName = useRef();
   const editLastName = useRef();
@@ -30,6 +38,7 @@ function DisplayContactList() {
 
   function deleteContact(id) {
     dispatch(deleteContactDetails(id));
+    dispatch(updateTotalRecordsCount(totalRecordsCount - 1));
     // api
     //   .delete(`/contacts/${id}.json`)
     //   .then((res) => dispatch(getContactData(contactData)));
@@ -84,6 +93,7 @@ function DisplayContactList() {
   }
   return (
     <>
+      {/* <Loader /> */}
       <div className="border-2 border-amber-700 bg-gray-300 overflow-y-scroll relative">
         {selector.length == 0 && (
           <div className="min-w-4xl h-full flex flex-col justify-center items-center">

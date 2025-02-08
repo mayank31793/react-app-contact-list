@@ -1,6 +1,6 @@
 import { useRef, useState } from "react";
-import { useDispatch } from "react-redux";
-import { saveNewContact } from "../../contactSlice";
+import { useDispatch, useSelector } from "react-redux";
+import { saveNewContact, updateTotalRecordsCount } from "../../contactSlice";
 
 function CreateNewContact() {
   const [errorFieldFirstName, setErrorFieldFirstName] = useState(false);
@@ -10,6 +10,7 @@ function CreateNewContact() {
   const lastNameRef = useRef();
   const contactNumberRef = useRef();
   const dispatch = useDispatch();
+  const totalCount = useSelector((state) => state.name.totalRecordsCount);
 
   function handleForm(e) {
     e.preventDefault();
@@ -36,6 +37,7 @@ function CreateNewContact() {
         isFavourite: false,
       };
       dispatch(saveNewContact(data));
+      dispatch(updateTotalRecordsCount(totalCount + 1));
       e.target.reset();
     }
   }
@@ -47,7 +49,7 @@ function CreateNewContact() {
             htmlFor="fname"
             className="bg-[#324376] absolute left-6 text-xs p-0.5"
           >
-            First Name
+            First Name {totalCount}
           </label>
           <input
             type="text"

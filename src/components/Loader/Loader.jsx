@@ -1,4 +1,4 @@
-import "../../global.css";
+import "./loader.css";
 function Loader() {
   return (
     <div>
