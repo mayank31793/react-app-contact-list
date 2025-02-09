@@ -1,21 +1,24 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faAddressCard, faCode } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
 import { querySearchDetails, getContactDetails } from "../../contactSlice";
 import { useDispatch } from "react-redux";
-import { useState, useRef } from "react";
+import { useRef, useCallback } from "react";
+import lodash from "lodash";
 
 function Header() {
-  const [searchText, setSearchText] = useState("");
   const searchString = useRef();
   const dispatch = useDispatch();
 
-  function searchQuery(event) {
-    if (event.key == "Enter") {
+  const debounceSearch = useCallback(
+    lodash.debounce((searchTerm) => {
       searchString.current.value.length != 0
-        ? dispatch(querySearchDetails(searchString.current.value))
+        ? dispatch(querySearchDetails(searchTerm))
         : dispatch(getContactDetails());
-    }
+    }, 500)
+  );
+
+  function searchQuery() {
+    debounceSearch(searchString.current.value);
   }
   return (
     <>

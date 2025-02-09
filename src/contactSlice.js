@@ -55,17 +55,15 @@ export const querySearchDetails = createAsyncThunk('query/queryContact', async (
 
 const contactSlice = createSlice({
     name: "contact",
-    initialState: { contact: [], refresh: false, totalRecordsCount: 0 },
+    initialState: { contact: [], refresh: false, totalRecordsCount: 0, isPaginationVisible: true },
     reducers: {},
     extraReducers: (builder) => {
         builder
             .addCase(getTotalRecordsCount.fulfilled, (state, action) => {
                 state.totalRecordsCount = action.payload.totalCount
-                // state.totalRecordsCount = 
             })
             .addCase(updateTotalRecordsCount.fulfilled, (state, action) => {
                 console.log(action)
-                // state.totalRecordsCount = 
             })
             .addCase(saveNewContact.fulfilled, (state, action) => {
                 state.refresh = !state.refresh
@@ -82,6 +80,7 @@ const contactSlice = createSlice({
                     };
                     listOfContacts.push(data);
                 }
+                state.isPaginationVisible = true
                 state.contact = listOfContacts
             })
             .addCase(deleteContactDetails.fulfilled, (state, action) => {
@@ -102,6 +101,7 @@ const contactSlice = createSlice({
                     };
                     listOfContacts.push(data);
                 }
+                state.isPaginationVisible = false
                 state.contact = listOfContacts
             })
             .addCase(getNextSetOfContactDetails.fulfilled, (state, action) => {

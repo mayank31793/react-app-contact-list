@@ -20,25 +20,26 @@ function Pagination() {
   const AllRecords = useSelector((state) => state.name.contact);
   const dispatch = useDispatch();
   const refresh = useSelector((state) => state.name.refresh);
+  const paginationVisible = useSelector(
+    (state) => state.name.isPaginationVisible
+  );
 
   function nextResults() {
-    // console.log("all rec", AllRecords[AllRecords.length - 1].key);
     dispatch(getNextSetOfContactDetails(AllRecords[AllRecords.length - 1].key));
     setPageCount((prev) => prev + 1);
   }
   function prevResults() {
-    // console.log("all rec", AllRecords[AllRecords.length - 1].key);
     dispatch(getPreviousSetOfContactDetails(AllRecords[0].key));
     setPageCount((prev) => prev - 1);
   }
   useEffect(() => {
     setPageCount(1);
-  }, [refresh]);
+  }, [refresh, paginationVisible]);
   return (
     <>
       <div
         className={`justify-center text-center align-middle mt-2 ${
-          pathname.pathname == "/" ? "flex" : "hidden"
+          pathname.pathname == "/" && paginationVisible ? "flex" : "hidden"
         }`}
       >
         <p className="px-3 py-2 font-bold text-lg text-[#324376]">

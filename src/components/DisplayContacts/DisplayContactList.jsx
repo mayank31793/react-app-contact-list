@@ -32,10 +32,6 @@ function DisplayContactList() {
 
   const [showEditableFields, setshowEditableFields] = useState(false);
 
-  // useEffect(() => {
-  //   dispatch(getContactDetails());
-  // }, [dispatch, selectorRefresh]);
-
   function deleteContact(id) {
     let confirm = window.confirm(
       "Are you sure you want to delete this contact ?"
@@ -54,13 +50,6 @@ function DisplayContactList() {
 
     console.log(`Element clicked at: X: ${x}, Y: ${y}`);
     setCoordinates({ ...coordinates, left: x, top: y });
-    // let data = {
-    //   key: id,
-    //   firstName: "lll",
-    //   lastName: "ppp",
-    //   contactNumber: 321112,
-    // };
-    // dispatch(updateContactDetails(data));
     editFirstName.current.value = data.fname;
     editLastName.current.value = data.lname;
     editContactNumber.current.value = data.contact;
@@ -72,7 +61,6 @@ function DisplayContactList() {
     setshowEditableFields(false);
   }
   function favContact(responseData) {
-    console.log("resp data > ", responseData);
     let data = {
       key: responseData.key,
       firstName: responseData.fname,
