@@ -9,12 +9,14 @@ import {
   faChevronLeft,
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
+import { useLocation } from "react-router-dom";
 
 function Pagination() {
   let [pageCount, setPageCount] = useState(1);
   const totalRecordsCount = useSelector(
     (state) => state.name.totalRecordsCount
   );
+  const pathname = useLocation();
   const AllRecords = useSelector((state) => state.name.contact);
   const dispatch = useDispatch();
   const refresh = useSelector((state) => state.name.refresh);
@@ -34,7 +36,11 @@ function Pagination() {
   }, [refresh]);
   return (
     <>
-      <div className="flex justify-center text-center align-middle mt-2">
+      <div
+        className={`justify-center text-center align-middle mt-2 ${
+          pathname.pathname == "/" ? "flex" : "hidden"
+        }`}
+      >
         <p className="px-3 py-2 font-bold text-lg text-[#324376]">
           {pageCount}/{Math.ceil(totalRecordsCount / 15)}
         </p>

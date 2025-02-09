@@ -49,7 +49,7 @@ function CreateNewContact() {
             htmlFor="fname"
             className="bg-[#324376] absolute left-6 text-xs p-0.5"
           >
-            First Name {totalCount}
+            First Name
           </label>
           <input
             type="text"

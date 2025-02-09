@@ -7,13 +7,13 @@ export const getContactDetails = createAsyncThunk('data/getContact', async () =>
 })
 
 export const getNextSetOfContactDetails = createAsyncThunk('data/getNextSetContact', async (lastKey) => {
-    const response = await api.get(`/contacts.json?orderBy="$key"&limitToFirst=15&startAt="${lastKey}"`);
+    const response = await api.get(`/contacts.json?orderBy="$key"&limitToFirst=15&startAfter="${lastKey}"`);
     console.log('it is get next ', response)
     return response.data
 })
 
 export const getPreviousSetOfContactDetails = createAsyncThunk('data/getPrevSetContact', async (firstKey) => {
-    const response = await api.get(`/contacts.json?orderBy="$key"&endAt="${firstKey}"&limitToLast=15`);
+    const response = await api.get(`/contacts.json?orderBy="$key"&endBefore="${firstKey}"&limitToLast=15`);
     console.log('it is get prev ', response)
     return response.data
 })
@@ -116,7 +116,6 @@ const contactSlice = createSlice({
                     };
                     listOfContacts.push(data);
                 }
-                listOfContacts.shift()
                 state.contact = listOfContacts
             })
             .addCase(getPreviousSetOfContactDetails.fulfilled, (state, action) => {
@@ -131,7 +130,6 @@ const contactSlice = createSlice({
                     };
                     listOfContacts.push(data);
                 }
-                listOfContacts.pop()
                 state.contact = listOfContacts
             })
     }

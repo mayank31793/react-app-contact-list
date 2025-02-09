@@ -37,11 +37,13 @@ function DisplayContactList() {
   // }, [dispatch, selectorRefresh]);
 
   function deleteContact(id) {
-    dispatch(deleteContactDetails(id));
-    dispatch(updateTotalRecordsCount(totalRecordsCount - 1));
-    // api
-    //   .delete(`/contacts/${id}.json`)
-    //   .then((res) => dispatch(getContactData(contactData)));
+    let confirm = window.confirm(
+      "Are you sure you want to delete this contact ?"
+    );
+    if (confirm) {
+      dispatch(deleteContactDetails(id));
+      dispatch(updateTotalRecordsCount(totalRecordsCount - 1));
+    }
   }
   function editContact(e, data) {
     console.log(e.target, data);
